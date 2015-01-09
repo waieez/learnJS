@@ -7,7 +7,7 @@ app.factory('Tasks', function (){
 app.controller('ToDoCtrl', ["$scope", "Tasks", function ($scope, Tasks) {
 	$scope.submit = function(task){
 		if (task) {
-			$scope.Tasks.push( {task: task, edit: false } );
+			$scope.Tasks.push( {task: task, completed: false, edit: false} );
 			$scope.task='';
 		}
 	}

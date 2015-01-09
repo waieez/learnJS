@@ -4,6 +4,7 @@
 	<title>Learn Angular</title>
 	<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js'></script>
 	<script src="app.js"></script>
+	<link rel="stylesheet" media="(max-width: 1920px)" href="style.css">
 </head>
 <body>
 	<div ng-controller="ToDoCtrl">
@@ -13,12 +14,18 @@
 	</form>
 	<ul>
 		<li ng-repeat="task in Tasks">
-			<div ng-hide="task.edit" ng-dblclick="editTask(task)">{{task.task}}</div>
+			<input type='checkbox' ng-model="task.completed"></input>
+			<div ng-class="{strike: task.completed}" ng-hide="task.edit" ng-dblclick="editTask(task)">{{task.task}}</div>
 			<form ng-show="task.edit" ng-submit="saveEdit(task)" ng-model-options="{ updateOn: 'submit' }">
 				<input type="text" ng-model="task.task" ng-blur="cancelEdit(task)"></input>
 				<input ng-show="" type="submit"></input>
 			</form>
 		</li>
+	</ul>
+	<ul id="tabs">
+		<li><a ng-href="#all">All</a></li>
+		<li><a ng-href="#active">Active</a></li>
+		<li><a ng-href="#completed">Completed</a></li>
 	</ul>
 </body>
 </html>
