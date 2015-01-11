@@ -1,4 +1,4 @@
-var app = angular.module("ToDoApp", []);
+var app = angular.module("ToDoApp", ['toDoFilter']);
 
 app.factory('Tasks', function (){
 	return {}
@@ -12,8 +12,15 @@ app.controller('ToDoCtrl', ["$scope", "Tasks", function ($scope, Tasks) {
 		}
 	}
 
-	$scope.editTask = function (task){
+	$scope.editTask = function (task, $index){
 		task.edit = true;
+
+		//very bad way of dealing with multiple focus behavior
+		$scope.Active.push($index);
+		if ($scope.Active.length > 1) {
+			var prev = $scope.Active.shift();
+			$scope.Tasks[prev].edit = false;
+		}
 	}
 
 	$scope.saveEdit = function(task){
@@ -26,5 +33,7 @@ app.controller('ToDoCtrl', ["$scope", "Tasks", function ($scope, Tasks) {
 	}
 
 	$scope.Tasks = [];
+	$scope.Active = [];
 
 }]);
+
