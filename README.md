@@ -10,6 +10,7 @@ Why do just one tutorial...
 ~DO ALL THE TUTORIALS~
 + https://www.codeschool.com/courses/shaping-up-with-angular-js
 + https://scotch.io/tutorials/creating-a-single-page-todo-app-with-node-and-angular
++ http://www.sitepoint.com/creating-crud-app-minutes-angulars-resource/
 + http://www.thinkful.com/learn/angularjs-tutorial-build-a-gmail-clone/Introduction
 + http://www.toptal.com/angular-js/a-step-by-step-guide-to-your-first-angularjs-app
 + https://docs.angularjs.org/tutorial

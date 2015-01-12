@@ -1,13 +1,16 @@
-var app = angular.module("ToDoApp", ['toDoFilter']);
+var app = angular.module("ToDoApp", ['ngResource','toDoFilter']);
 
-app.factory('Tasks', function (){
-	return {}
+app.factory('Tasks', function ($resource){
+	return $resource('/api/tasks/:id', {}, { saveTask : {method:'POST', params: {saveTask:true} , isArray:true} });
 });
 
 app.controller('ToDoCtrl', ["$scope", "Tasks", function ($scope, Tasks) {
 	$scope.submit = function(task){
 		if (task) {
-			$scope.Tasks.push( {task: task, completed: false, edit: false} );
+
+			var newTask = new Tasks( {task: task, completed: false, edit: false} );
+			newTask.$save();
+			$scope.Tasks.push(newTask);
 			$scope.task='';
 		}
 	}
@@ -25,6 +28,7 @@ app.controller('ToDoCtrl', ["$scope", "Tasks", function ($scope, Tasks) {
 
 	$scope.saveEdit = function(task){
 		task.edit = false;
+		//put resource here.
 	}
 
 	//ends up being the same thing.
@@ -32,8 +36,11 @@ app.controller('ToDoCtrl', ["$scope", "Tasks", function ($scope, Tasks) {
 		task.edit = false;
 	}
 
-	$scope.Tasks = [];
 	$scope.Active = [];
+	$scope.Tasks = Tasks.query(function(){
+
+	});
+
 
 }]);
 
