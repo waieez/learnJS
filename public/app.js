@@ -1,19 +1,24 @@
 var app = angular.module("ToDoApp", ['ngResource','toDoFilter']);
 
 app.factory('Tasks', function ($resource){
-	return $resource('/api/tasks/:id', {id:"@id"}, { saveTask : {method:'POST', params: {saveTask:true} , isArray:true} });
+	return $resource('/api/tasks/:id', {id:"@id"}, { "update" : {method:'PUT'} } );
 });
 
 app.controller('ToDoCtrl', ["$scope", "Tasks", function ($scope, Tasks) {
+
+	$scope.Tasks = Tasks.query();
+
 	$scope.submit = function(task){
 		if (task) {
 
 			var newTask = new Tasks( {task: task, completed: false, edit: false} );
-			newTask.$save(); // want to get object from mongodb w/ id for edits
-			$scope.Tasks.push(newTask); //is this $$hashkey == id?
+			newTask.$save();
+			$scope.Tasks.push(newTask);
 			$scope.task='';
 		}
 	}
+
+	$scope.Active = [];
 
 	$scope.editTask = function (task, $index){
 		task.edit = true;
@@ -22,16 +27,16 @@ app.controller('ToDoCtrl', ["$scope", "Tasks", function ($scope, Tasks) {
 		$scope.Active.push($index);
 		if ($scope.Active.length > 1) {
 			var prev = $scope.Active.shift();
-			$scope.Tasks[prev].edit = false;
+			if (prev != $index) $scope.Tasks[prev].edit = false;
 		}
 	}
 
 	$scope.saveEdit = function(task){
 		task.edit = false;
-		//call put
+		Tasks.update({id: task["_id"]}, task);
+		console.log('Updated');
 	}
 
-	//ends up being the same thing.
 	$scope.cancelEdit = function (task){
 		task.edit = false;
 	}
@@ -44,10 +49,5 @@ app.controller('ToDoCtrl', ["$scope", "Tasks", function ($scope, Tasks) {
 			});
 		}
 	}
-
-	$scope.Active = [];
-	$scope.Tasks = Tasks.query(function(){
-
-	});
 
 }]);

@@ -47,11 +47,19 @@ db.once('open', function(){
 		});
 	})
 
-	app.delete('/api/tasks/:id', function (req, res){
-		console.log("DELETE")
-		Task.remove({_id: req.params.id}, function (err, task) {
+	app.put('/api/tasks/:id', function (req, res){
+		console.log("PUT")
+		Task.findByIdAndUpdate(req.params.id, {task: req.body.task, completed: req.body.completed}, function (err, task) {
 			if (err) res.send(err);
 			res.json(task);
+		});
+	})
+
+	app.delete('/api/tasks/:id', function (req, res){
+		console.log("DELETE");
+		Task.remove({_id: req.params.id}, function (err, success) {
+			if (err) res.send(err);
+			res.json(success);
 		});
 	})
 
