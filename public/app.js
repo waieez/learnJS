@@ -1,7 +1,7 @@
 var app = angular.module("ToDoApp", ['ngResource','toDoFilter']);
 
 app.factory('Tasks', function ($resource){
-	return $resource('/api/tasks/:id', {}, { saveTask : {method:'POST', params: {saveTask:true} , isArray:true} });
+	return $resource('/api/tasks/:id', {id:"@id"}, { saveTask : {method:'POST', params: {saveTask:true} , isArray:true} });
 });
 
 app.controller('ToDoCtrl', ["$scope", "Tasks", function ($scope, Tasks) {
@@ -9,8 +9,8 @@ app.controller('ToDoCtrl', ["$scope", "Tasks", function ($scope, Tasks) {
 		if (task) {
 
 			var newTask = new Tasks( {task: task, completed: false, edit: false} );
-			newTask.$save();
-			$scope.Tasks.push(newTask);
+			newTask.$save(); // want to get object from mongodb w/ id for edits
+			$scope.Tasks.push(newTask); //is this $$hashkey == id?
 			$scope.task='';
 		}
 	}
@@ -28,7 +28,7 @@ app.controller('ToDoCtrl', ["$scope", "Tasks", function ($scope, Tasks) {
 
 	$scope.saveEdit = function(task){
 		task.edit = false;
-		//put resource here.
+		//call put
 	}
 
 	//ends up being the same thing.
@@ -36,11 +36,18 @@ app.controller('ToDoCtrl', ["$scope", "Tasks", function ($scope, Tasks) {
 		task.edit = false;
 	}
 
+	$scope.deleteTask = function (task, $index) {
+		if ( confirm("Are you sure?") ) {
+			task.$delete({ id: task["_id"] }, function (success){
+				$scope.Tasks.splice($index, 1);
+				console.log("Deleted");
+			});
+		}
+	}
+
 	$scope.Active = [];
 	$scope.Tasks = Tasks.query(function(){
 
 	});
 
-
 }]);
-

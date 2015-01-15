@@ -4,7 +4,8 @@
   "description": "YUSOMEAN",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "node index"
   },
   "author": "elixian@gmail.com",
   "license": "MIT",

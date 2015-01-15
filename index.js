@@ -32,7 +32,7 @@ db.once('open', function(){
 	app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
 
 	app.get('/api/tasks', function (req, res){
-
+		console.log("GET")
 		Task.find(function(err, tasks){
 			if (err) return console.error(err);
 			res.json(tasks);
@@ -40,8 +40,16 @@ db.once('open', function(){
 	})
 
 	app.post('/api/tasks', function (req, res){
-
+		console.log("POST")
 		Task.create(req.body, function (err, task) {
+			if (err) res.send(err);
+			res.json(task);
+		});
+	})
+
+	app.delete('/api/tasks/:id', function (req, res){
+		console.log("DELETE")
+		Task.remove({_id: req.params.id}, function (err, task) {
 			if (err) res.send(err);
 			res.json(task);
 		});

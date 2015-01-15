@@ -15,9 +15,14 @@
 			<input type="submit"></input>
 		</form>
 		<ul>
+			<!-- Lists all Tasks -->
 			<li ng-repeat="task in Tasks | taskCompleted:status">
+				<!-- Checkbox to change status of task -->
 				<input type='checkbox' ng-model="task.completed"></input>
+				<!-- task: shown when not editing -->
 				<div ng-class="{strike: task.completed}" ng-hide="task.edit" ng-dblclick="editTask(task, $index)">{{task.task}}</div>
+				<button ng-click="deleteTask(task, $index)">clear</button>
+				<!-- edit task: shown when editing -->
 				<form ng-show="task.edit" ng-submit="saveEdit(task)" ng-model-options="{ updateOn: 'submit' }">
 					<input type="text" ng-model="task.task" ng-blur="cancelEdit(task)"></input>
 					<input ng-show="" type="submit"></input>
