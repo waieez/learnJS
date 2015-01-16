@@ -27,3 +27,13 @@ mongoose
 + http://blog.modulus.io/getting-started-with-mongoose
 
 and much more...
+
+
+
+Bugs?
+
+In order for Express Router middleware to not conflict with ngResource, need to call app.get("/api/tasks") instead of app.use in order for the get request to "/api/tasks" to not be overridden by the "/" route.
+
+This behavior may be due to Express Router's default path being set to '/' if no path is supplied and the way ngResource handles requests.
+
+Changing app.use("/", tasksRouter) to app.get results allows GETs to the API but not POSTS.

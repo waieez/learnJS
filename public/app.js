@@ -1,3 +1,5 @@
+"use strict";
+
 var app = angular.module("ToDoApp", ['ngResource','toDoFilter']);
 
 app.factory('Tasks', function ($resource){
