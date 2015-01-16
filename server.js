@@ -15,11 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // parse application/vnd.api+json as json <- not sure what this is for.
-app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
-
-app.use("/api/tasks/:id", tasksRouter);
-
-app.get("/api/tasks", tasksRouter);
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 app.use("/", tasksRouter);
 

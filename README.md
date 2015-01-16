@@ -32,8 +32,5 @@ and much more...
 
 Bugs?
 
-In order for Express Router middleware to not conflict with ngResource, need to call app.get("/api/tasks") instead of app.use in order for the get request to "/api/tasks" to not be overridden by the "/" route.
-
-This behavior may be due to Express Router's default path being set to '/' if no path is supplied and the way ngResource handles requests.
-
-Changing app.use("/", tasksRouter) to app.get results allows GETs to the API but not POSTS.
+Fixed: Router does not need an app.use(path) for every path on router. just one '/'.
+Silly that I wasted so much time testing the different get/use configurations until I decided to reverse the order to see what would happen.

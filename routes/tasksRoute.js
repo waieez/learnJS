@@ -5,7 +5,6 @@ var express = require('express'),
 	Task = require('.././models/tasksModel');
 
 router.route("/api/tasks/:id")
-	.get(function (req,res,next){ console.log('not doing nothing here...')})
 	.put(function (req, res, next){
 		console.log("PUT")
 		Task.findByIdAndUpdate(req.params.id, {task: req.body.task, completed: req.body.completed}, function (err, task) {
@@ -40,7 +39,7 @@ router.route('/api/tasks')
 router.route("/")
 	.get(function (req, res, next){
 		res.render('index.html.ejs');
-	});
+	})
 
 
 module.exports = router;
