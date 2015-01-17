@@ -12,8 +12,8 @@
 
 	<div ng-controller="ToDoCtrl">
 
-
 		<form ng-submit="submit(task)">
+			<input type='checkbox' ng-model="toggle.status" ng-click="toggleAll()"></input>
 			<input type="text" ng-model="task" placeholder="Remind me to do this"></input>
 			<input type="submit"></input>
 		</form>
@@ -23,7 +23,7 @@
 			<li ng-repeat="task in Tasks | taskCompleted:status">
 
 				<!-- Checkbox to change status of task -->
-				<input type='checkbox' ng-model="task.completed" ng-click="saveEdit(task)"></input>
+				<input type='checkbox' ng-model="task.completed" ng-click="setCompleted(task)"></input>
 
 				<!-- task: shown when not editing -->
 				<div ng-class="{strike: task.completed}" ng-hide="task.edit" ng-dblclick="editTask(task, $index)">{{task.task}}</div>

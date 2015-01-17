@@ -6,7 +6,7 @@ app.filter("taskCompleted", function (){
 		var arr = [];
 
 		for (var i = 0; i < input.length; i++) {
-			if( input[i].completed !== status ) arr.push(input[i]);
+			if( input[i].completed !== status ) arr.push(input[i]); 
 		};
 		
 		return arr;
@@ -16,11 +16,11 @@ app.filter("taskCompleted", function (){
 //not very dry.. but cleaner
 app.filter("completedTasksIds", function (){
 
-	return function (input) {
+	return function (input, status) {
 		var arr = [];
 
 		for (var i = 0; i < input.length; i++) {
-			if( input[i].completed == true ) arr.push(input[i]["_id"]);
+			if( input[i].completed !== status ) arr.push(input[i]["_id"]);
 		};
 		
 		return arr;

@@ -29,8 +29,15 @@ router.route('/api/tasks')
 		});
 	})
 	.post(function (req, res, next){
-		console.log("POST")
+		console.log("POST");
 		Task.create(req.body, function (err, task) {
+			if (err) res.send(err);
+			res.json(task);
+		});
+	})
+	.put(function (req, res, next){
+		console.log("PUT Multi");
+		Task.update({'_id':{'$in':req.query.ids}}, {'$set': {completed: req.body.completed}}, {multi: true} , function (err, task) {
 			if (err) res.send(err);
 			res.json(task);
 		});
