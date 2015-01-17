@@ -12,6 +12,7 @@
 
 	<div ng-controller="ToDoCtrl">
 
+
 		<form ng-submit="submit(task)">
 			<input type="text" ng-model="task" placeholder="Remind me to do this"></input>
 			<input type="submit"></input>
@@ -36,6 +37,8 @@
 
 			</li>
 		</ul>
+
+		<button ng-click="clearCompleted()">Clear Completed</button>
 
 		<ul id="tabs">
 			<li><a ng-href="#all" ng-click="status = '' ">All</a></li>

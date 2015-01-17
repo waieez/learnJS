@@ -3,10 +3,10 @@
 var app = angular.module("ToDoApp", ['ngResource','toDoFilter']);
 
 app.factory('Tasks', function ($resource){
-	return $resource('/api/tasks/:id', {id:"@id"}, { "update" : {method:'PUT'} } );
+	return $resource('/api/tasks/:id', {id:"@id"}, { "update" : {method:'PUT'}, "deleteMulti" : { method:'DELETE'} } );
 });
 
-app.controller('ToDoCtrl', ["$scope", "Tasks", function ($scope, Tasks) {
+app.controller('ToDoCtrl', ["$scope", "Tasks", "completedTasksIdsFilter", 'taskCompletedFilter', function ($scope, Tasks, completedTasksIdsFilter, taskCompletedFilter) {
 
 	$scope.Tasks = Tasks.query();
 
@@ -48,6 +48,16 @@ app.controller('ToDoCtrl', ["$scope", "Tasks", function ($scope, Tasks) {
 			task.$delete({ id: task["_id"] }, function (success){
 				$scope.Tasks.splice($index, 1);
 				console.log("Deleted");
+			});
+		}
+	}
+
+	$scope.clearCompleted = function (){
+		var ids = completedTasksIdsFilter($scope.Tasks);
+		if ( confirm('Are you sure?') ){
+			Tasks.deleteMulti({ids: ids}, function (success){
+				$scope.Tasks = taskCompletedFilter($scope.Tasks, true);
+				console.log("Deleted multi!")
 			});
 		}
 	}
