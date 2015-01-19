@@ -6,7 +6,9 @@ var bodyParser = require('body-parser');
 
 var tasksRouter = require('./routes/tasksRoute');
 
-app.use(express.static('public'));
+app.use(express.static('projects'));
+
+app.use(express.static('todo_app'));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));

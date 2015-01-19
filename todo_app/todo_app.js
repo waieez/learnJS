@@ -1,6 +1,14 @@
 "use strict";
 
-var app = angular.module("ToDoApp", ['ngResource','toDoFilter']);
+var app = angular.module("ToDoApp", ['ngResource','toDoFilter', 'ngRoute']);
+
+app.config(function($routeProvider){
+	$routeProvider
+		.when('/todo', {
+			templateUrl: '_todo_view.html',
+			controller: 'ToDoCtrl'
+		})
+});
 
 app.factory('Tasks', function ($resource){
 	return $resource('/api/tasks/:id', {id:"@id"}, { "update" : {method:'PUT'}, 'updateAll': {method: 'PUT'} ,"deleteMulti" : { method:'DELETE'} } );
@@ -86,9 +94,9 @@ app.controller('ToDoCtrl', ["$scope", "Tasks", "$filter", function ($scope, Task
 
 	$scope.clearCompleted = function (){
 
-		var ids = $filter('completedTasksIds')($scope.Tasks);
+		var ids = $filter('completedTasksIds')($scope.Tasks, false);
 
-		if ( confirm('Are you sure?') ){
+		if ( ids.length && confirm('Are you sure?') ){
 			Tasks.deleteMulti({ids: ids}, function (success){
 				$scope.Tasks = $filter('taskCompleted')($scope.Tasks, true);
 				console.log("Deleted multi!")

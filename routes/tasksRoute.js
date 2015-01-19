@@ -44,16 +44,18 @@ router.route('/api/tasks')
 	})
 	.delete(function (req, res, next){
 		console.log("DELETE Multi");
-		Task.remove({'_id':{'$in':req.query.ids}}, function (err, success) {
+		var ids = req.query.ids;
+		if (ids && ids.constructor != Array) { ids = [ids] };
+
+		Task.remove({'_id':{'$in': ids}}, function (err, success) {
 			if (err) res.send(err);
-			res.json(success);
+			res.json(success);			
 		});
 	});
 
 router.route("/")
 	.get(function (req, res, next){
 		res.render('index.html.ejs');
-	})
-
+	});
 
 module.exports = router;

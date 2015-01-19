@@ -1,0 +1,36 @@
+<div ng-app="ToDoApp">
+<!-- <div ng-controller="ToDoCtrl"> -->
+
+	<form ng-submit="submit(task)">
+		<input type='checkbox' ng-model="toggle.status" ng-click="toggleAll()"></input>
+		<input type="text" ng-model="task" class='wideinput' placeholder="Remind me to do this"></input>
+		<input type="submit"></input>
+	</form>
+
+	<ul>
+		<!-- Lists all Tasks -->
+		<li ng-repeat="task in Tasks| taskCompleted:status">
+
+			<!-- Checkbox to change status of task -->
+			<input type='checkbox' ng-model="task.completed" ng-click="setCompleted(task)"></input>
+
+			<!-- task: shown when not editing -->
+			<div ng-class="{strike: task.completed}" ng-hide="task.edit" ng-dblclick="editTask(task, $index)">{{task.task}}</div>
+			<button ng-click="deleteTask(task, $index)" ng-hide="task.edit">X</button>
+
+			<!-- edit task: shown when editing -->
+			<form ng-show="task.edit" ng-submit="saveEdit(task)" ng-model-options="{ updateOn: 'submit' }">
+				<input type="text" ng-model="task.task" ng-blur="cancelEdit(task)" ng-class="{wideinput: task.edit}"></input>
+				<input ng-show="" type="submit"></input>
+			</form>
+
+		</li>
+	</ul>
+
+	<ul id="tabs">
+		<button ng-click="status=''">All</button>
+		<button ng-click="status=true">Active</button>
+		<button ng-click="status=false">Completed</button>
+		<button ng-click="clearCompleted()">Clear Completed</button>
+	</ul>
+</div>
