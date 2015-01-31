@@ -1,11 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="FirebaseApp">
 <head>
+	<meta charset="utf8">
 	<title>LearnFirebase</title>
 	<script src='https://cdn.firebase.com/js/client/2.0.4/firebase.js'></script>
 </head>
 <body>
+	Hello World
+	
+	
+
+	<div ng-controller="FirebaseController as fb">
+	{{fb.message}}
+	<br>
+		<form ng-submit="sendMessage(fb.message)">
+			<input ng-model="fb.message" type='text'></input>
+			<input type='submit'></input>
+		</form>
+		
+
+		<div>
+			<ul ng-repeat='message in Messages'>
+				<li>
+					{{message.message}}
+				</li>
+			</ul>
+		</div>
+	</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.2/angular.js"></script>
+<script src="index.js"></script>
 </body>
 </html>
