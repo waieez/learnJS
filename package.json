@@ -1,0 +1,11 @@
+{
+  "name": "learnFirebase",
+  "version": "1.0.0",
+  "description": "learning angularfire",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Eli Xian elixian@gmail.com",
+  "license": "MIT"
+}
