@@ -6,11 +6,9 @@
 	<script src='https://cdn.firebase.com/js/client/2.0.4/firebase.js'></script>
 </head>
 <body>
-	Hello World
-	
-	
-
+	Hello World	
 	<div ng-controller="FirebaseController as fb">
+
 	{{fb.message}}
 	<br>
 		<form ng-submit="sendMessage(fb.message)">
@@ -18,7 +16,6 @@
 			<input type='submit'></input>
 		</form>
 		
-
 		<div>
 			<ul ng-repeat='message in Messages'>
 				<li>
@@ -26,9 +23,11 @@
 				</li>
 			</ul>
 		</div>
+		
 	</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.2/angular.js"></script>
-<script src="index.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.2/angular.js"></script>
+	<script src='https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js'></script>
+	<script src="index.js"></script>
 </body>
 </html>
