@@ -49,7 +49,7 @@ router.route('/api/tasks')
 
 		Task.remove({'_id':{'$in': ids}}, function (err, success) {
 			if (err) res.send(err);
-			res.json(success);			
+			res.json(success);
 		});
 	});
 
