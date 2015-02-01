@@ -1,0 +1,23 @@
+li {
+	list-style-type: none;
+}
+
+li * {
+	display: inline-block;
+}
+
+.strike {
+	text-decoration: line-through;
+}
+
+#tabs li{
+	display: inline-block;
+}
+
+a {
+	text-decoration: none;
+}
+
+.wideinput {
+	width: 30em;
+}
