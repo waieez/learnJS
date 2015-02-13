@@ -1,6 +1,6 @@
 "use strict";
 var express = require('express'),
-	app = express();
+    app = express();
 
 var bodyParser = require('body-parser');
 
