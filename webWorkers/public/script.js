@@ -9,13 +9,13 @@ for(var i = 0; i < 4; i++){
 
 for(var j = 0; j < workers.length; j++){
 
-  workers[j].postMessage({message: 'hi there'});
+  workers[j].postMessage({row: 0, col:1});
 
   (function(j){
 
     workers[j].onmessage = function(e){
       resultCount++;
-      results[j] = e.data.message;
+      results[j] = e.data.result;
       if(resultCount === workers.length){
         done();
       }

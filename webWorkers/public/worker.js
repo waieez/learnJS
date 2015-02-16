@@ -1,7 +1,10 @@
 onmessage = function(e){
 
-  console.log(e.data.message);
+  var row = e.data.row;
+  var col = e.data.col;
 
-  var message = {message:'hi dere'};
+  console.log(row, col);
+
+  var message = {result: ['soltuion']};
   postMessage(message);
 }
