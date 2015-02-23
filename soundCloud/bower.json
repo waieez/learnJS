@@ -1,0 +1,19 @@
+{
+  "name": "soundCloud",
+  "version": "0.0.0",
+  "homepage": "https://github.com/waieez/learnJS",
+  "authors": [
+    "Eli Xian <elixian@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "~1.8.2"
+  }
+}
