@@ -1,0 +1,11 @@
+{
+  "name": "soundCloud",
+  "version": "1.0.0",
+  "description": "sound cloud api app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eli Xian, elixian@gmail.com",
+  "license": "MIT"
+}
